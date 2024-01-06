@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Sidebar from "./layouts/sidebar";
+import Header from "./layouts/header";
+import MarketInfo from "./layouts/market info";
+import Graphic from "./layouts/graphic";
+import PriceChange from "./layouts/price chage";
+import Market from "./layouts/market";
+import {useTheme} from "./contexts/ThemeContext";
 
 function App() {
+   const { isLightMode, toggleMode } = useTheme();
+   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='w-screen h-screen bg-black flex'>
+       <Sidebar />
+       <div className='w-screen'>
+          <Header />
+          <div className={`p-[20px] flex flex-col gap-6 ${isLightMode ? 'bg-marketColor' : 'bg-white'}`}>
+             <MarketInfo />
+             <div className='flex gap-[20px]'>
+                <Graphic />
+                <PriceChange />
+             </div>
+             <Market />
+          </div>
+       </div>
     </div>
   );
 }
